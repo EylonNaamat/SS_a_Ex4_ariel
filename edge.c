@@ -8,7 +8,7 @@ typedef struct edge_ {
     struct edge_ *next;
 } edge, *pedge;
 
-pedge edge_alloc(int weight, pnode endpiont, )
+pedge edge_alloc(int weight, pnode endpoint, pedge next)
 {
     pedge p = (pedge)(malloc(sizeof(edge)));
     if(p == NULL)
@@ -16,4 +16,12 @@ pedge edge_alloc(int weight, pnode endpiont, )
         return NULL;
     }
     p -> weight = weight;
+    p -> endpoint = endpoint;
+    p -> next = next;
+    return p;
+}
+
+void free_edge(pedge edge)
+{
+    free(edge);
 }
