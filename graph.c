@@ -20,11 +20,63 @@ pnode find_node(pnode tempgr, int num)
 
 void insert_node_cmd(pnode *head)
 {
-
+    int num;
+    int dist;
+    int weight;
+    scanf("%d", &num);
+    pnode pointN = find_node(*head, num);
+    if(pointN == NULL)
+    {
+        pointN = node_alloc(num);
+        pointN->next=(*head);
+        *head = pointN;
+    }
+    else{
+    remove_edges(pointN);
+    }
+    while((scanf("%d" , &dist))&&(!feof(stdin)))
+    {
+        scanf("%d", &weight);
+        pnode tempn = find_node(*head, dist);
+        add_edge(edge_alloc(weight,tempn,NULL), pointN);
+    }
 }
 void delete_node_cmd(pnode *head)
 {
-    
+    int num;
+    pnode startnode;
+    scanf("%d",&num);
+    if((*head)==NULL)
+    {
+        return;
+    }
+    if((*head)->node_num == num)
+    {
+        startnode = *head;
+        *head=(*head)->next;
+    }
+    else
+    {
+        startnode = *head;
+        pnode temp = (*head)->next;
+        while(temp!=NULL)
+        {
+            if(temp->node_num == num)
+            {
+                startnode->next=temp->next;
+                break;
+            }
+            startnode= startnode->next;
+            temp = temp->next;
+        }
+    }
+    pnode runnodes = *head;
+    while(runnodes!=NULL)
+    {
+        remove_edge(runnodes,num);
+        runnodes=runnodes->next;
+    }
+    free_node(startnode);
 }
 void printGraph_cmd(pnode head) //for self debug
 {

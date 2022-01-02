@@ -26,6 +26,38 @@ void free_node(pnode pointN)
     free(pointN);
 }
 
+void remove_edge(pnode pointN, int num)
+{
+    pedge pointE;
+    if(pointN->edges==NULL)
+    {
+        return;
+    }
+    if(pointN->edges->endpoint->node_num==num)
+    {
+        pointE = pointN->edges;
+        pointN->edges = pointN->edges->next;
+        free_edge(pointE);
+        return;
+    }
+    pointE = pointN->edges;
+    pedge temp = pointN->edges->next;
+    while (temp!=NULL)
+    {
+        if(temp->endpoint->node_num==num)
+        {
+           pointE->next=temp->next; 
+           free_edge(temp);
+        }
+        else
+        {
+            pointE = pointE->next;
+            temp=temp->next;
+        }
+    }
+    
+    
+}
 void add_edge(pedge pointE, pnode pointN)
 {
     pointE->next = pointN->edges;
