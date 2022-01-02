@@ -2,7 +2,7 @@
 #include "node.h"
 #include "edge.h"
 
-int node_alloc(int num)
+pnode node_alloc(int num)
 {
     pnode pointN = (pnode)(malloc(sizeof(node)));
     if(pointN==NULL)
@@ -12,7 +12,7 @@ int node_alloc(int num)
     pointN->node_num = num;
     pointN->next = NULL;
     pointN->edges = NULL;
-    return 1;
+    return pointN;
 }
 
 void free_node(pnode pointN)
