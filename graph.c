@@ -41,51 +41,65 @@ void printGraph_cmd(pnode head) //for self debug
        head = head->next; 
     }
 }
+
 void deleteGraph_cmd(pnode* head)
 {
     pnode* temp;
     while((*head) != NULL)
     {
         temp = (*head)->next;
-        delete_node_cmd((*head));
+        free_node((*head));
         *head = temp;
     }
 }
 
 void build_graph_cmd(pnode * head)
 {
+    char ch;
+    int size;
+    int node_src;
+    int weight;
+    int node_dest;
+    pnode src;
+    pnode dest;
+    pedge edge = NULL;
+
     if((*head) != NULL)
     {
         deleteGraph_cmd(head);
     }
-    char ch;
-    int size;
-    int num;
+
     scanf("%d", &size);
     (*head)= node_alloc(--size);
+
     if((*head) == NULL)
     {
         return;
     }
+
     while(size != 0)
     {
         pnode temp = node_alloc(--size);
         temp->next = (*head);
         (*head) = temp;
     }
+
     while(!feof(stdin) || ch != 'B' || ch != 'D' || ch != 'S' || ch != 'T')
     {
         scanf("%c", &ch);
         if(ch == 'n')
         {
-            scanf("%d", &num);
-            while(scanf("%d", &num))
+            scanf("%d", &node_src);
+            src = find_node((*head), node_src);
+            while(scanf("%d", &node_dest))
             {
-                
+                dest = find_node((*head), node_dest);
+                scanf("%d", &weight);
+                edge = edge_alloc(weight, dest, edge);
+                add_edge(edge, src);
             }
         }
     }
-
 }
 
 void shortsPath_cmd(pnode head);
