@@ -4,7 +4,7 @@ typedef struct GRAPH_NODE_ {
     struct GRAPH_NODE_ *next;
 } node, *pnode;
 
-
+void remove_edge(pnode pointN, int num);
 pnode node_alloc(int num);
 void free_node(pnode pointN);
 void add_edge(pedge pointE, pnode pointN);
