@@ -1,9 +1,5 @@
 #include "node.h"
-<<<<<<< HEAD
-=======
-#include "edge.h"
 
->>>>>>> 91ae2a168b66cb760c8bf0affc82c0b003f802e4
 
 pnode find_node(pnode tempgr, int num);
 
