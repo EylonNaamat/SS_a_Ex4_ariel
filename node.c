@@ -2,7 +2,6 @@
 #include "node.h"
 #include "edge.h"
 
-
 int node_alloc(int num)
 {
     pnode pointN = (pnode)malloc(sizeof(node));
@@ -25,4 +24,19 @@ void free_node(pnode pointN)
         free_edge(pointE);
     }
     free(pointN);
+}
+
+void add_edge(pedge pointE, pnode pointN)
+{
+    pointE->next = pointN->edges;
+    pointN->edges = pointE;
+}
+void remove_edges(pnode pointN)
+{
+    while(pointN->edges!=NULL)
+    {
+        pedge pointE =  pointN->edges;
+        pointN->edges = pointE->next;
+        free_edge(pointE);
+    }
 }

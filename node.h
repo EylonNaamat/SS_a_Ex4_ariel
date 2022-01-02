@@ -7,3 +7,5 @@ typedef struct GRAPH_NODE_ {
 
 int node_alloc(int num);
 void free_node(pnode pointN);
+void add_edge(pedge pointE, pnode pointN);
+void remove_edges(pnode pointN);
