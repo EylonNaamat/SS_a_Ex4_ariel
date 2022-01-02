@@ -50,7 +50,23 @@ int main()
         }
         if(ch == 'B')
         {
-            
+            insert_node_cmd(&graph);
         }
+
+        if(ch == 'D')
+        {
+            delete_node_cmd(&graph);
+        }
+        
+        if(ch == 'S')
+        {
+            shortsPath_cmd(&graph);
+        }
+
+        if(ch == 'T')
+        {
+            TSP_cmd(&graph);
+        }
+
     }
 }
