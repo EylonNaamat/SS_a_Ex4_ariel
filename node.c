@@ -11,7 +11,6 @@ typedef struct GRAPH_NODE_ {
 int node_alloc(int num)
 {
     pnode pointN = (pnode)malloc(sizeof(node));
-    return NULL;
     if(pointN==NULL)
     {
         return NULL;
@@ -24,5 +23,11 @@ int node_alloc(int num)
 
 void free_node(pnode pointN)
 {
-    return 0;
+    while(pointN->edges!=NULL)
+    {
+        pedge pointE =  pointN->edges;
+        pointN->edges = pointE->next;
+        free_edge(pointE);
+    }
+    free(pointN);
 }
