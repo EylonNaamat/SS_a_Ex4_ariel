@@ -12,10 +12,10 @@ int main()
     while(!feof(stdin))
     {
         scanf("%c", &ch);
-        if(ch == 'A')
+        while(ch == 'A')
         {
             deleteGraph_cmd(&graph);
-            build_graph_cmd(&graph);
+            ch = build_graph_cmd(&graph);
         }
 
         if(ch == 'B')

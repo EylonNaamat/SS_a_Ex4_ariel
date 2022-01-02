@@ -34,7 +34,7 @@ void insert_node_cmd(pnode *head)
     else{
     remove_edges(pointN);
     }
-    while((scanf("%d" , &dist))&&(!feof(stdin)))
+    while((!feof(stdin)) && (scanf("%d" , &dist)))
     {
         scanf("%d", &weight);
         pnode tempn = find_node(*head, dist);
@@ -105,9 +105,9 @@ void deleteGraph_cmd(pnode* head)
     }
 }
 
-void build_graph_cmd(pnode * head)
+char build_graph_cmd(pnode * head)
 {
-    char ch;
+    char ch = 0;
     int size;
     int node_src;
     int weight;
@@ -136,14 +136,14 @@ void build_graph_cmd(pnode * head)
         (*head) = temp;
     }
 
-    while(!feof(stdin) || ch != 'B' || ch != 'D' || ch != 'S' || ch != 'T')
+    while((!feof(stdin)) && ch != 'B' && ch != 'D' && ch != 'S' && ch != 'T' && ch != 'A')
     {
         scanf("%c", &ch);
         if(ch == 'n')
         {
             scanf("%d", &node_src);
             src = find_node((*head), node_src);
-            while(scanf("%d", &node_dest))
+            while((!feof(stdin)) && scanf("%d", &node_dest))
             {
                 dest = find_node((*head), node_dest);
                 scanf("%d", &weight);
@@ -152,6 +152,7 @@ void build_graph_cmd(pnode * head)
             }
         }
     }
+    return ch;
 }
 
 void shortsPath_cmd(pnode head);
