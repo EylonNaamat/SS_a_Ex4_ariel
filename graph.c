@@ -154,12 +154,113 @@ char build_graph_cmd(pnode * head)
     }
     return ch;
 }
-
-void shortsPath_cmd(pnode head);
+void set_defult_value(pnode other)
 {
+    while(other!=NULL)
+    {  
+        other->prev = NULL;
+        other->info = 0;
+        other-> weight = __INT_MAX__;
+        other = other->next;
+    }
+}
+pnode min_not_visited(pnode other)
+{
+    pnode ans = NULL;
+    while(other!=NULL)
+    {
+        if(other->info == 0)
+        {
+            if(other->weight!=__INT_MAX__)
+            {
+                if(ans == NULL)
+                {
+                    ans = other;
+                }
+                if(other->weight<ans->weight)
+                {
+                    ans = other;
+                }
+            }
+        }
+        other = other->next;
+    }
+    return ans;
+}
+void dijkstra_algo(pnode other ,int num)
+{
+    set_defult_value(other);
+    pnode runNod = find_node(other, num);
+    runNod->weight = 0;
+    while(runNod!=NULL)
+    {
+        runNod->info = 1;
+        pedge nedges = runNod->edges;
+        while(nedges!=NULL)
+        {
+            pnode destN = nedges->endpoint;
+            if(destN->info==0)
+            {
+                if((destN->weight)>((runNod->weight)+(destN->weight)))
+                {
+                    destN->weight = ((runNod->weight)+(destN->weight));
+                    destN->prev = runNod;
+                }
+            }
+            nedges = nedges->next;
+        }
+        runNod = min_not_visited(other);
+
+    }
+
 
 }
-void TSP_cmd(pnode head);
+int shortsPath_cmd(pnode head,int num1,int num2)
 {
+    
+    dijkstra_algo(head,num1);
+    pnode ans = find_node(head, num2);
+    if(ans == NULL)
+    {
+        printf("-1");
+        return __INT_MAX__;
+    }
+    else
+    {
+        if(ans->weight == __INT_MAX__)
+        {
+            printf("-1");
+            return __INT_MAX__;
+        }
+        else
+        {
+            printf("%d", ans->weight);
+            return ans->weight;
+        }
+    }
+}
+void TSP_cmd(pnode head)
+{
+    int num;
+    scanf("%d", &num);
+    int *arr = (int*)(malloc(sizeof(int)*num));
+    for(int i =0 ; i<num; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+}
 
+int TSP_helper_cmd(pnode head, int *arr,int num)
+{
+    int sum =0;
+    for(int i=0;i<num-1;i++)
+    {
+        int num = shortsPath_cmd(head , arr[i],arr[i+1]);
+        if(num==-1)
+        {
+            return __INT_MAX__;
+        }
+        sum+=num;
+    }
+    return sum;
 }

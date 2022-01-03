@@ -2,6 +2,9 @@ typedef struct GRAPH_NODE_ {
     int node_num;
     pedge edges;
     struct GRAPH_NODE_ *next;
+    pnode prev;
+    int weight;
+    int info;
 } node, *pnode;
 
 void remove_edge(pnode pointN, int num);

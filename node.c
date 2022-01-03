@@ -12,6 +12,10 @@ pnode node_alloc(int num)
     pointN->node_num = num;
     pointN->next = NULL;
     pointN->edges = NULL;
+    pointN->weight = __INT_MAX__;
+    pointN->info = 0;
+    pointN->prev = NULL;
+    
     return pointN;
 }
 
@@ -58,11 +62,13 @@ void remove_edge(pnode pointN, int num)
     
     
 }
+
 void add_edge(pedge pointE, pnode pointN)
 {
     pointE->next = pointN->edges;
     pointN->edges = pointE;
 }
+
 void remove_edges(pnode pointN)
 {
     while(pointN->edges!=NULL)

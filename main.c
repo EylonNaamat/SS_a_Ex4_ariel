@@ -30,7 +30,10 @@ int main()
         
         if(ch == 'S')
         {
-            shortsPath_cmd(&graph);
+            int num1;
+            int num2;
+            scanf("%d %d",&num1 , &num2);
+            shortsPath_cmd(&graph,num1 , num2);
         }
 
         if(ch == 'T')
