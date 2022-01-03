@@ -8,7 +8,7 @@ int main()
 {
     char ch = 'q';
     pnode graph =NULL;
-    while(!feof(stdin))
+    while(ch != '\n' && !feof(stdin))
     {
         scanf("%c", &ch);
         while(ch == 'A')

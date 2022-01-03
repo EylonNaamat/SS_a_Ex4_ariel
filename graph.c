@@ -145,7 +145,7 @@ char build_graph_cmd(pnode * head)
         (*head) = temp;
     }
 
-    while((!feof(stdin)) && ch != 'B' && ch != 'D' && ch != 'S' && ch != 'T' && ch != 'A')
+    while(ch != '\n' && !feof(stdin) && ch != 'B' && ch != 'D' && ch != 'S' && ch != 'T' && ch != 'A')
     {
         scanf("%c", &ch);
         if(ch == 'n')
