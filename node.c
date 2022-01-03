@@ -52,6 +52,7 @@ void remove_edge(pnode pointN, int num)
         {
            pointE->next=temp->next; 
            free_edge(temp);
+           return;
         }
         else
         {
