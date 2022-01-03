@@ -7,7 +7,7 @@
 int main()
 {
     char ch;
-    pnode graph;
+    pnode graph =NULL;
     while(!feof(stdin))
     {
         scanf("%c", &ch);
@@ -15,6 +15,8 @@ int main()
         {
             deleteGraph_cmd(&graph);
             ch = build_graph_cmd(&graph);
+            //printGraph_cmd(graph);
+            //printf("\n");
         }
 
         if(ch == 'B')
@@ -32,13 +34,30 @@ int main()
             int num1;
             int num2;
             scanf("%d %d",&num1 , &num2);
-            shortsPath_cmd( graph, num1 , num2);
+            int ans = shortsPath_cmd( graph, num1 , num2);
+            if(ans == __INT_MAX__)
+            {
+                printf("Dijsktra shortest path: -1 \n");
+            }
+            else
+            {
+                printf("Dijsktra shortest path: %d \n",ans);
+            }
         }
 
         if(ch == 'T')
         {
-            TSP_cmd(graph);
+            int ans = TSP_cmd(graph);
+            if(ans == __INT_MAX__)
+            {
+                printf("TSP shortest path: -1 \n");
+            }
+            else
+            {
+                printf("TSP shortest path: %d \n",ans);
+            }
         }
 
     }
+   deleteGraph_cmd(&graph); 
 }

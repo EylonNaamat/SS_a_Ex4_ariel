@@ -36,6 +36,6 @@ void set_defult_value(pnode other);
 pnode min_not_visited(pnode other);
 void dijkstra_algo(pnode other ,int num);
 int shortsPath_cmd(pnode head, int num1 , int num2);
-void TSP_cmd(pnode head);
+int TSP_cmd(pnode head);
 void TSP_helper_cmd(pnode head, int *arr,int num, int curr,int *pmin);
 

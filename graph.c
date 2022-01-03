@@ -80,7 +80,13 @@ void printGraph_cmd(pnode head) //for self debug
 {
     while(head!=NULL)
     {
-        printf("%d : ", head->node_num);
+        printf("%d :", head->node_num);
+        if(head->prev!=NULL)
+        {
+            printf("prev %d", head->prev->node_num);
+        }
+        printf(" weigth %d", head->weight);
+        printf(" info %d\n", head->info);
         pedge pointE= head->edges;
         while(pointE!=NULL)
         {
@@ -88,6 +94,7 @@ void printGraph_cmd(pnode head) //for self debug
             printf("%d  ", pointE->weight);
             pointE = pointE->next;
         }
+        printf("\n");
        head = head->next; 
     }
 }
@@ -199,9 +206,9 @@ void dijkstra_algo(pnode other ,int num)
             pnode destN = nedges->endpoint;
             if(destN->info==0)
             {
-                if((destN->weight)>((runNod->weight)+(destN->weight)))
+                if((destN->weight)>((runNod->weight)+(nedges->weight)))
                 {
-                    destN->weight = ((runNod->weight)+(destN->weight));
+                    destN->weight = ((runNod->weight)+(nedges->weight));
                     destN->prev = runNod;
                 }
             }
@@ -220,19 +227,16 @@ int shortsPath_cmd(pnode head,int num1,int num2)
     pnode ans = find_node(head, num2);
     if(ans == NULL)
     {
-        printf("-1");
         return __INT_MAX__;
     }
     else
     {
         if(ans->weight == __INT_MAX__)
         {
-            printf("-1");
             return __INT_MAX__;
         }
         else
         {
-            printf("%d", ans->weight);
             return ans->weight;
         }
     }
@@ -243,7 +247,7 @@ void swap_place(int *arr, int num1, int num2)
     arr[num1]=arr[num2];
     arr[num2]=temp;
 }
-void TSP_cmd(pnode head)
+int TSP_cmd(pnode head)
 {
     int num;
     scanf("%d", &num);
@@ -260,7 +264,7 @@ void TSP_cmd(pnode head)
         TSP_helper_cmd(head,arr,num,0,pmin);
         swap_place(arr,i,0);
     }
-    printf("%d", *pmin);
+    return *pmin;
 }
 void TSP_helper_cmd(pnode head, int *arr,int num, int curr,int *pmin)
 {
@@ -280,7 +284,7 @@ void TSP_helper_cmd(pnode head, int *arr,int num, int curr,int *pmin)
     {
         swap_place(arr,1,i);
         int dist = shortsPath_cmd(head,arr[0],arr[1]);
-        if(curr==__INT_MAX__)
+        if(dist==__INT_MAX__)
         {
             return;
         }
