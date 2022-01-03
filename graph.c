@@ -72,13 +72,13 @@ void delete_node_cmd(pnode *head)
             }
         }
     }
-    free_node(startnode);
     pnode runnodes = *head;
     while(runnodes!=NULL)
     {
         remove_edge(runnodes,num);
         runnodes=runnodes->next;
     }
+    free_node(startnode);
 }
 void printGraph_cmd(pnode head) //for self debug
 {

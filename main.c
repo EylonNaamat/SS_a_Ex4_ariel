@@ -26,7 +26,9 @@ int main()
 
         if(ch == 'D')
         {
+            printGraph_cmd(graph);
             delete_node_cmd(&graph);
+            printGraph_cmd(graph);
         }
         
         if(ch == 'S')
