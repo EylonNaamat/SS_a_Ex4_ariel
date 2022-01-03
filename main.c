@@ -6,7 +6,7 @@
 
 int main()
 {
-    char ch;
+    char ch = 'q';
     pnode graph =NULL;
     while(!feof(stdin))
     {

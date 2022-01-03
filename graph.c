@@ -268,6 +268,7 @@ int TSP_cmd(pnode head)
         TSP_helper_cmd(head,arr,num,0,pmin);
         swap_place(arr,i,0);
     }
+    free(arr);
     return *pmin;
 }
 void TSP_helper_cmd(pnode head, int *arr,int num, int curr,int *pmin)
