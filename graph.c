@@ -1,12 +1,10 @@
-#include "node.h"
-#include "edge.h"
 #include "graph.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 pnode find_node(pnode tempgr, int num)
 {
-    pnode ans = NULL;
     while(tempgr!=NULL)
     {
         if(tempgr->node_num == num)
@@ -88,7 +86,7 @@ void printGraph_cmd(pnode head) //for self debug
         {
             printf("%d - ", pointE->endpoint->node_num);
             printf("%d  ", pointE->weight);
-            pointE->next;
+            pointE = pointE->next;
         }
        head = head->next; 
     }
@@ -96,7 +94,7 @@ void printGraph_cmd(pnode head) //for self debug
 
 void deleteGraph_cmd(pnode* head)
 {
-    pnode* temp;
+    pnode temp;
     while((*head) != NULL)
     {
         temp = (*head)->next;
@@ -126,7 +124,7 @@ char build_graph_cmd(pnode * head)
 
     if((*head) == NULL)
     {
-        return;
+        return 'A';
     }
 
     while(size != 0)
@@ -239,28 +237,54 @@ int shortsPath_cmd(pnode head,int num1,int num2)
         }
     }
 }
+void swap_place(int *arr, int num1, int num2)
+{
+    int temp = arr[num1];
+    arr[num1]=arr[num2];
+    arr[num2]=temp;
+}
 void TSP_cmd(pnode head)
 {
     int num;
     scanf("%d", &num);
     int *arr = (int*)(malloc(sizeof(int)*num));
+    int min = __INT_MAX__;
+    int * pmin=&min;
     for(int i =0 ; i<num; i++)
     {
         scanf("%d", &arr[i]);
     }
-}
-
-int TSP_helper_cmd(pnode head, int *arr,int num)
-{
-    int sum =0;
-    for(int i=0;i<num-1;i++)
+    for(int i=0;i<num;i++)
     {
-        int num = shortsPath_cmd(head , arr[i],arr[i+1]);
-        if(num==-1)
-        {
-            return __INT_MAX__;
-        }
-        sum+=num;
+        swap_place(arr,0,i);
+        TSP_helper_cmd(head,arr,num,0,pmin);
+        swap_place(arr,i,0);
     }
-    return sum;
+    printf("%d", *pmin);
+}
+void TSP_helper_cmd(pnode head, int *arr,int num, int curr,int *pmin)
+{
+    if(num==2)
+    {
+        int finshdist = shortsPath_cmd(head,arr[0],arr[1]);
+        if(finshdist!=__INT_MAX__)
+        {
+            if((curr + finshdist)<*pmin)
+            {
+                *pmin = (curr+finshdist);
+            }
+        }
+        return;
+    }
+    for(int i=1;i<num;i++)
+    {
+        swap_place(arr,1,i);
+        int dist = shortsPath_cmd(head,arr[0],arr[1]);
+        if(curr==__INT_MAX__)
+        {
+            return;
+        }
+        TSP_helper_cmd(head,arr+1,num-1,curr+dist,pmin);
+        swap_place(arr,i,1);
+    }
 }

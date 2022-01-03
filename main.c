@@ -1,8 +1,7 @@
 
 #include "graph.h"
 #include <stdio.h>
-#include "edge.h"
-#include "node.h"
+#include <stdlib.h>
 
 
 int main()
@@ -33,12 +32,12 @@ int main()
             int num1;
             int num2;
             scanf("%d %d",&num1 , &num2);
-            shortsPath_cmd(&graph,num1 , num2);
+            shortsPath_cmd( graph, num1 , num2);
         }
 
         if(ch == 'T')
         {
-            TSP_cmd(&graph);
+            TSP_cmd(graph);
         }
 
     }

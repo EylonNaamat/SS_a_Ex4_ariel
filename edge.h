@@ -1,5 +1,3 @@
-#include "node.h"
-
 
 typedef struct edge_ {
     int weight;
