@@ -41,6 +41,7 @@ void insert_node_cmd(pnode *head)
 }
 void delete_node_cmd(pnode *head)
 {
+    printGraph_cmd(*head);
     int num;
     pnode startnode;
     scanf("%d",&num);
@@ -62,19 +63,23 @@ void delete_node_cmd(pnode *head)
             if(temp->node_num == num)
             {
                 startnode->next=temp->next;
+                startnode = temp;
                 break;
             }
-            startnode= startnode->next;
-            temp = temp->next;
+            else
+            {
+                startnode= startnode->next;
+                temp = temp->next;
+            }
         }
     }
+    free_node(startnode);
     pnode runnodes = *head;
     while(runnodes!=NULL)
     {
         remove_edge(runnodes,num);
         runnodes=runnodes->next;
     }
-    free_node(startnode);
 }
 void printGraph_cmd(pnode head) //for self debug
 {
