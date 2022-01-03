@@ -10,6 +10,7 @@ int main()
     pnode graph =NULL;
     while(ch != '\n' && !feof(stdin))
     {
+        
         scanf("%c", &ch);
         while(ch == 'A')
         {
