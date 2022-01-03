@@ -82,6 +82,7 @@ void delete_node_cmd(pnode *head)
 }
 void printGraph_cmd(pnode head) //for self debug
 {
+    
     while(head!=NULL)
     {
         printf("%d :", head->node_num);
