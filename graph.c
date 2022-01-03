@@ -41,7 +41,6 @@ void insert_node_cmd(pnode *head)
 }
 void delete_node_cmd(pnode *head)
 {
-    printGraph_cmd(*head);
     int num;
     pnode startnode;
     scanf("%d",&num);
